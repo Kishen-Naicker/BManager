@@ -15,7 +15,7 @@ Download: [here](https://github.com/Kishen-Naicker/BManager/releases)
 # Development Tools
 •	Visual Studio (IDE)
 
-•	C# .Net framework 4.7.2 WPF(Written in)
+•	C# .Net framework 4.7.2 WPF (Written in)
 
 # Author
  Kishen Naicker
