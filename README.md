@@ -1,6 +1,8 @@
 # BManager
 This is a personal budget planner written in C# and is designed to help user manage their monthly income and expenditures.
 
+Download: [here](https://github.com/Kishen-Naicker/BManager/releases)
+
 # Version
 1.0
 
