@@ -1,0 +1,171 @@
+﻿<Window x:Class="BudgetManager.Views.WelcomeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BudgetManager.Views"
+        mc:Ignorable="d"
+        Height="600" Width="800" 
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Icon="{StaticResource pieIcon}">
+
+    <Border Padding="20">
+        <Grid>
+            <!--#region grid row definitions-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="298*"/>
+                <RowDefinition Height="231*"/>
+            </Grid.RowDefinitions>
+            <!--#endregion-->
+
+            <!--#region backgound image -->
+            <Viewbox Grid.RowSpan="2">
+                <Image 
+                    Source="{StaticResource budget}"
+                    Opacity="0.1" 
+                    Height="2300" 
+                    Width="1900"/>
+            </Viewbox>
+            <!--#endregion-->
+
+            <!--#region main header + colorbrush animation-->
+            <TextBlock 
+                    Text="WELCOME TO THE BUDGET MANAGING SYSTEM"
+                    FontSize="30"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center" Margin="33,0" Grid.RowSpan="2">
+
+                <TextBlock.Foreground>
+                    <SolidColorBrush 
+                            x:Name="SolidColorBrush" 
+                            Color="DarkBlue"/>
+                </TextBlock.Foreground>
+
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="TextBlock.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation 
+                                            Storyboard.TargetName="SolidColorBrush"
+                                            Storyboard.TargetProperty="Color"
+                                            From="Orange" To="DarkBlue" Duration="0:0:1.5"
+                                            AutoReverse="True" RepeatBehavior="Forever" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
+            <!--#endregion-->
+
+            <StackPanel x:Name="sp" VerticalAlignment="Center" Margin="0,137,0,-13" Grid.RowSpan="2" Height="405">
+
+                <!--#region textblocks-->
+                <TextBlock 
+                    Text="This is a personal budgeting software designed to help you manage your monthly income. As well as develop a savings plan to save up a certain amount of money for a specific reason."
+                    FontSize="14"
+                    FontStyle="Italic"
+                    FontWeight="DemiBold"
+                    HorizontalAlignment="Center"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap"
+                    Margin="0 0 0 0" Width="600"/>
+
+                <TextBlock 
+                    Text="Within this software you will be able to print your budget overview and/or save it as a PDF. A calculator is at your disposal as well should you need to do any calculations."
+                    FontSize="14"
+                    FontStyle="Italic"
+                    FontWeight="DemiBold"
+                    HorizontalAlignment="Center"
+                    TextWrapping="Wrap"
+                    TextAlignment="Center"
+                    Margin="0 30 0 0" Width="600"/>
+
+                <TextBlock 
+                    Text="This software depands the input of various confidential amounts. To begin using the planner, you first need accept this term."
+                    TextWrapping="Wrap"
+                    TextAlignment="Center"
+                    FontSize="14"
+                    FontStyle="Italic"
+                    FontWeight="DemiBold"
+                    HorizontalAlignment="Center"
+                    Margin="160,30,160,15" Width="420"/>
+                <!--#endregion-->
+
+                <!--#region accept and decline buttons + animation for accept button-->
+                <Button
+                    x:Name="AcceptBtn"
+                    Content="Accept"
+                    Width="80"
+                    Background="WhiteSmoke"
+                    Click="AcceptBtn_Click"
+                    ToolTip="Click">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="progressBar"
+                                        Storyboard.TargetProperty="Value"
+                                        From="0" To="100" Duration="0:0:3" 
+                                        FillBehavior="HoldEnd"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+
+                <Button
+                    x:Name="DeclineBtn"
+                    Content="Decline"
+                    Width="80"
+                    Background="WhiteSmoke"
+                    Margin="0 5 0 0"
+                    Click="DeclineBtn_Click"
+                    ToolTip="Click"/>
+                <!--#endregion-->
+
+                <Grid  Margin="0 145 0 0" Height="20">
+                    <!--#region progress bar + textblock progress %-->
+                    <ProgressBar x:Name="progressBar" Width="300" RenderTransformOrigin="0.517,3.975" Visibility="Hidden" Background="White">
+                        <ProgressBar.Foreground>
+                            <SolidColorBrush 
+                            x:Name="SolidColorBrushTwo" 
+                            Color="DarkBlue"/>
+                        </ProgressBar.Foreground>
+
+                        <ProgressBar.Triggers>
+                            <EventTrigger RoutedEvent="ProgressBar.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                            Storyboard.TargetName="SolidColorBrushTwo"
+                                            Storyboard.TargetProperty="Color"
+                                            From="Orange" To="DarkBlue" Duration="0:0:0.8"
+                                            AutoReverse="True" RepeatBehavior="Forever" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ProgressBar.Triggers>
+                    </ProgressBar>
+
+                    <TextBlock x:Name="progressTb" Text="{Binding ElementName=progressBar, Path=Value, StringFormat={}{0:0}%}" 
+                               FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                    <!--#endregion-->
+                </Grid>
+
+            </StackPanel>
+
+            <!-- copyright label -->
+            <Label 
+                    Content="© Kishen 20116885 "
+                    Margin="318,0" 
+                    FontWeight="Normal" 
+                    Foreground="Black" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Bottom"
+                    Opacity="0.4" Grid.Row="1" />
+        </Grid>
+    </Border>
+
+</Window>

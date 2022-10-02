@@ -1,0 +1,430 @@
+﻿<Window x:Class="BudgetManager.Views.BudgetView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:BudgetManager.Views" 
+        xmlns:local1="clr-namespace:BudgetManager.Validator"
+        mc:Ignorable="d"
+        Icon="{StaticResource pieIcon}"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Loaded="Window_Loaded" Height="1132" Width="1552">
+
+    <!--#region error template-->
+    <Window.Resources>
+        <ControlTemplate x:Key="errorTemplate">
+            <StackPanel>
+                <TextBlock Foreground="Red">Invalid Value!!!</TextBlock>
+                <AdornedElementPlaceholder/>
+            </StackPanel>
+        </ControlTemplate>
+    </Window.Resources>
+    <!--#endregion-->
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Border Padding="10">
+            <Grid >
+
+                <!--#region grid column and row definitions -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5.66"/>
+                    <ColumnDefinition Width="658.34"/>
+                    <ColumnDefinition Width="38*"/>
+                    <ColumnDefinition Width="59*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <!--#endregion-->
+
+                <!--#region back button and header-->
+                <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
+                    <Button x:Name="BackBtn" Width="75" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                            BorderThickness="0" Background="LightSteelBlue" Click="BackBtn_Click" >
+                        <Image Source="{StaticResource back}"/>
+                    </Button>
+                    <TextBlock 
+                        Grid.Row="0"
+                        Text="BUDGET MANAGER"
+                        FontSize="15"
+                        FontWeight="Regular"
+                        Foreground="Gray"
+                        Margin="10,5,0,0"/>
+                </DockPanel>
+                <!--#endregion-->
+
+                <!--#region proceed button-->
+
+                <TextBlock Grid.Row="2" Text="Click the button below if you are done and the amounts above." 
+                           HorizontalAlignment="Left" FontWeight="DemiBold" Background="WhiteSmoke" Margin="104,20,0,2" Width="344" Grid.Column="1" Grid.RowSpan="2"/>
+
+                <Button Grid.Row="4" x:Name="proceedBtn" Content="Proceed" Grid.RowSpan="2" Margin="208,9,314,11" Click="proceedBtn_Click" Grid.Column="1"/>
+
+                <!--#endregion-->
+
+                <!--#region exit button-->
+
+                <Button Grid.Row="3" Grid.Column="2" x:Name="reloadBtn" Content="Reload" Grid.RowSpan="2" Margin="295,9,82,11" Width="80" 
+                        ToolTip="Reload the current window" Click="reloadBtn_Click"/>
+
+                <Button Grid.Row="5" Grid.Column="2" x:Name="exitBtn" Content="Exit" Grid.RowSpan="2" Margin="295,9,82,11" Width="80" 
+                        Click="exitBtn_Click" ToolTip="Exit the application"/>
+
+                <!--#endregion-->
+
+                <!--#region color banners-->
+                <TextBlock Grid.Row="1" Background="SteelBlue" Margin="0,966,100,2" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <TextBlock Grid.Column="2" Grid.Row="1" Background="SteelBlue" Grid.ColumnSpan="2" Margin="0,966,0,2" Grid.RowSpan="2"/>
+                <!--#endregion-->
+
+                <StackPanel Grid.Row="1" Margin="0 15 0 0" Grid.ColumnSpan="2">
+                    <Grid >
+
+                        <!--#region grid column and row definitions-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75*"/>
+                            <ColumnDefinition Width="180*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+                        <!--#endregion-->
+
+                        <!--#region color banners-->
+                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Background="SteelBlue" Margin="0 0 100 2" />
+                        <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Background="SteelBlue" Margin="0 0 100 2"/>
+                        <TextBlock Grid.Row="11" Grid.ColumnSpan="2" Background="SteelBlue" Margin="0 0 100 2"/>
+                        <TextBlock Grid.Row="15" Grid.ColumnSpan="2" Background="SteelBlue" Margin="0 0 100 2"/>
+                        <TextBlock Grid.Row="22" Grid.ColumnSpan="2" Background="SteelBlue" Margin="0 0 100 2"/>
+                        <!--#endregion-->
+
+                        <!--#region textbox labels-->
+                        <!--income label-->
+                        <TextBlock Grid.Row="1" Text="Income" VerticalAlignment="Center"/>
+
+                        <!--extimated tax label-->
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Estimated Tax" VerticalAlignment="Center"/>
+
+                        <!--general expenses labels-->
+                        <TextBlock Grid.Column="0" Grid.Row="5" Text="Groceries" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="0" Grid.Row="6" Text="Water and Lights" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="0" Grid.Row="7" Text="Travel" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="0" Grid.Row="8" Text="Cellphone and Telephone" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="0" Grid.Row="9" Text="Other Expenses" VerticalAlignment="Center"/>
+
+                        <!--monthly rent label-->
+                        <TextBlock Grid.Row="13" Text="        Monthly Rent" VerticalAlignment="Center"/>
+
+                        <!--homeloan information labels-->
+                        <TextBlock Grid.Row="17" Text="        Purchase Price" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="18" Text="        Total Deposit" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="19" Text="        Interest Rate" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="20" Text="        Number Of Months" VerticalAlignment="Center"/>
+
+                        <!--vehicle information labels-->
+                        <TextBlock Grid.Row="24" Text="        Model Make" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="25" Text="        Purchase Price" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="26" Text="        Total Deposit" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="27" Text="        Interest Rate" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="28" Text="        Estimated Insurance" VerticalAlignment="Center"/>
+                        <!--#endregion-->
+
+                        <!--#region chexkboxes and textboxes + validations-->
+                        <!--income textbox-->
+                        <TextBox Grid.Column="1" Grid.Row="1" Name="incomeTb" Margin="0 12 100 9" Background="WhiteSmoke" 
+                                 Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="income" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+
+                        <!--estimated tax textbox-->
+                        <TextBox Grid.Row="2" Grid.Column="1" x:Name="taxtTb" Margin="0 12 100 9" Background="WhiteSmoke"
+                                 Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="tax" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+
+                        <!--general expenses textboxes-->
+                        <TextBox Grid.Row="5" Grid.Column="1" x:Name="groceriesTb" Margin="0 12 100 9" Background="WhiteSmoke"
+                                 Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="groceries" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <TextBox Grid.Row="6" Grid.Column="1" x:Name="waterAndLightsTb" Margin="0 12 100 9"  Background="WhiteSmoke"
+                                 Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="waterLights" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <TextBox Grid.Row="7" Grid.Column="1" x:Name="travelTb" Margin="0 12 100 9" Background="WhiteSmoke"
+                                 Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="travel" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <TextBox Grid.Row="8" Grid.Column="1" x:Name="cellularTb" Margin="0 12 100 9" Background="WhiteSmoke"
+                                 Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="cellular" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <TextBox Grid.Row="9" Grid.Column="1" x:Name="otherTb" Margin="0 12 100 9" Background="WhiteSmoke"
+                                 Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="otherExpense" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+
+                        <!--monthly rent checkbox and textbox-->
+                        <CheckBox Grid.Row="12" x:Name="rentCb" Margin="0 5 100 0" Content="Renting" Checked="rentCb_Checked" Unchecked="rentCb_Unchecked"/>
+                        <TextBox Grid.Row="13" Grid.Column="1" x:Name="rentingTb" Background="WhiteSmoke" IsEnabled="False" Margin="0 12 100 9"
+                                  Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="rent" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+
+                        <!--property checkbox and textboxes-->
+                        <CheckBox Grid.Row="16" x:Name="propertyCb"  Margin="0 5 100 0" Content="Property" Checked="propertyCb_Checked" Unchecked="propertyCb_Unchecked"/>
+                        <TextBox Grid.Row="17" Grid.Column="1" x:Name="purchasePriceTb" Background="WhiteSmoke" IsEnabled="False" Margin="0 12 100 9"
+                                 Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="purchacePrice" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <TextBox Grid.Row="18" Grid.Column="1" x:Name="depositTb" Background="WhiteSmoke" IsEnabled="False" Margin="0 12 100 9" 
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="totalDeposit" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <TextBox Grid.Row="19" Grid.Column="1" x:Name="interestRateTb" Background="WhiteSmoke" IsEnabled="False" Margin="0 12 100 9" 
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="interestRate" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <TextBox Grid.Row="20" Grid.Column="1" x:Name="monthsTb" Background="WhiteSmoke" IsEnabled="False" Margin="0 12 100 9" 
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError" ToolTip="Enter number of months between 240 and 360">
+                            <Binding Path="months" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+
+                        <!--vehicle checkbox and textboxes-->
+                        <CheckBox Grid.Row="23" x:Name="vehicleCb"  Margin="0 5 100 0" Content="Vehicle" Checked="vehicleCb_Checked" Unchecked="vehicleCb_Unchecked"/>
+                        <TextBox Grid.Row="24" Grid.Column="1" x:Name="modelMakeTb" Background="WhiteSmoke" IsEnabled="False" Margin="0 12 100 9" Text="{Binding Path=modelMake}"/>
+
+                        <TextBox Grid.Row="25" Grid.Column="1" x:Name="vehiclePriceTb" Background="WhiteSmoke" IsEnabled="False" Margin="0 12 100 9"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="vehiclePurchasePrice" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <TextBox Grid.Row="26" Grid.Column="1" x:Name="vehicleDepositTb" Background="WhiteSmoke" IsEnabled="False" Margin="0 12 100 9"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="vehicleTotalDeposit" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <TextBox Grid.Row="27" Grid.Column="1" x:Name="vehicleInterestRateTb" Background="WhiteSmoke" IsEnabled="False" Margin="0 12 100 9"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="vehicleInterestRate" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <TextBox Grid.Row="28" Grid.Column="1" x:Name="insuranceTb" Background="WhiteSmoke" IsEnabled="False" Margin="0 12 100 9"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}" Validation.Error="NumberError">
+                            <Binding Path="estInsurance" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local1:InputValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <!--#endregion-->
+
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Margin="0 15 0 0">
+                    <Grid >
+
+                        <!--#region grid column and row definitions-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                        <!--#endregion-->
+
+                        <!--#region colour banners-->
+                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Background="SteelBlue" Margin="0 0 0 2"/>
+                        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Background="SteelBlue" Margin="0 0 0 2"/>
+                        <TextBlock Grid.Row="9" Grid.ColumnSpan="2" Background="SteelBlue" Margin="0 0 0 2"/>
+                        <TextBlock Grid.Row="15" Grid.ColumnSpan="2" Background="SteelBlue" Margin="0 0 0 2"/>
+                        <!--#endregion-->
+
+                        <!--#region total expenses and income balance textblock labels and textblock outputs-->
+                        <!--labels-->
+                        <TextBlock Grid.Row="1" Text="Total Expenses: " TextAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+                        <TextBlock Grid.Row="2" Text="Income Balance: " TextAlignment="Center" FontWeight="Bold" VerticalAlignment="Center" FontSize="15"/>
+                        <!--outputs-->
+                        <TextBlock x:Name="totalExpTb" Grid.Column="1" Grid.Row="1" TextAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
+                        <TextBlock x:Name="incomeBalTb" Grid.Column="1" Grid.Row="2" TextAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
+                        <!--#endregion-->
+
+                        <!--#region notifications background image and textblocks-->
+                        <Viewbox Grid.Column="0" Grid.Row="10" Grid.RowSpan="5" Grid.ColumnSpan="2">
+                            <Image Source="{StaticResource priorities}" Opacity="0.1" Width="600" Height="240" />
+                        </Viewbox>
+                        <TextBlock Grid.Row="10" Grid.ColumnSpan="2" Text="Notifications*" FontWeight="DemiBold" FontStyle="Italic"/>
+                        <TextBlock x:Name="expenseDelegateTb" Grid.Row="11" Grid.ColumnSpan="2" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="Red"/>
+                        <TextBlock x:Name="hlNotifyTb" Grid.Row="13" Grid.ColumnSpan="2" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="Red"/>
+                        <!--#endregion-->
+
+                        <!--#region button description textlocks-->
+                        <TextBlock Grid.Row="20" Grid.Column="2" Grid.RowSpan="6" Text="View your budget overview, as well as allowing you to print or save your budget overview."
+                                   TextWrapping="Wrap" FontWeight="DemiBold" Padding="5" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="30" Grid.Column="2" Grid.RowSpan="7" Text="Simple calculator at your disposal"
+                                   TextWrapping="Wrap" FontWeight="DemiBold" Padding="5" VerticalAlignment="Center"/>
+                        <!--#endregion-->
+
+                        <!--#region buttons -> overview, saving plan, calculator -->
+                        <!--Budget Overview button-->
+                        <Button x:Name="overviewBtn" Grid.Row="20" Grid.Column="0" Grid.RowSpan="6" Click="overviewBtn_Click" ToolTip="Click">
+                            <DockPanel>
+                                <Image DockPanel.Dock="Top" MaxHeight="80" MaxWidth="80" Source="{StaticResource trends}" Margin="0 5 0 0"/>
+                                <TextBlock Text="Budget Overview" HorizontalAlignment="Center" VerticalAlignment="Bottom" Padding="5"/>
+                            </DockPanel>
+                        </Button>
+
+                        <!--Calculator button-->
+                        <Button x:Name="calculatorBtn" Grid.Row="30" Grid.Column="0" Grid.RowSpan="7" Click="calculatorBtn_Click" ToolTip="Click">
+                            <DockPanel>
+                                <Image DockPanel.Dock="Top" MaxHeight="80" MaxWidth="80" Source="{StaticResource calculator}" Margin="0 10 0 0"/>
+                                <TextBlock Text="Calculator" HorizontalAlignment="Center" VerticalAlignment="Bottom" Padding="5"/>
+                            </DockPanel>
+                        </Button>
+                        <!--#endregion-->
+
+                    </Grid>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+    </ScrollViewer>
+
+</Window>
